@@ -4,12 +4,12 @@ import {
     AccordionBody,
     AccordionHeader,
     AccordionItem,
-    Button
 } from 'reactstrap';
 import './Karakter.css'
 
 const Karakter = (props) => {
     const { character } = props;
+    const { film } = props;
     const [open, setOpen] = useState('');
     const toggle = (id) => {
         if (open === id) {
@@ -21,7 +21,7 @@ const Karakter = (props) => {
 
     return (
         <>
-        <Accordion flush open={open} toggle={toggle}>
+            <Accordion flush open={open} toggle={toggle}>
                 <AccordionItem>
                     <AccordionHeader targetId="1">{character.name}</AccordionHeader>
                     <AccordionBody accordionId="1">
@@ -33,13 +33,24 @@ const Karakter = (props) => {
                         <p>Hair Color : {character.hair_color}</p>
                         <p>Skin Color : {character.skin_color}</p>
                         <span>Appears in {character.films.length} films</span>
+                        <div>
+                            <Accordion flush open={open} toggle={toggle}>
+                                <AccordionItem >
+                                    <AccordionHeader targetId="1">{film.title}</AccordionHeader>
+                                    <AccordionBody accordionId="1">
+                                        <p>Gender : {film.opening_crawl}</p>
+                                        <p>Directed by : {film.director}</p>
+                                        <p>Produced by : {film.producer}</p>
+                                        <p>Release Date : {film.release_date}</p>
+                                    </AccordionBody>
+                                </AccordionItem>
+                            </Accordion>
+                        </div>
                     </AccordionBody>
                 </AccordionItem>
             </Accordion>
-            
-            
         </>
-            
+
     );
 }
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Karakter from "../components/Karakter";
-import Films from "../components/Films";
 import axios from "axios";
 import './ContentPage.css'
 
@@ -45,10 +44,8 @@ const ContentPage = () => {
           {characters && characters.map((character, index) => {
             return <Karakter character={character} key={index}/>
           })}
-        </div>
-        <div>
           {films && films.map((film,ind) => {
-            return <Films film={film} key={ind}/>
+            return <Karakter film={film.results} key={ind}/>
           })}
         </div>
       </div>
