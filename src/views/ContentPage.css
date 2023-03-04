@@ -1,0 +1,11 @@
+.App{
+
+}
+.search input{
+    width: 100%;
+}
+.search {
+    display:flex;
+    justify-content: center;
+    padding: 10% 3% 3% 3%
+}
