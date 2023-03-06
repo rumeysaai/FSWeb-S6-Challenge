@@ -8,9 +8,10 @@ import {
 import './Karakter.css'
 
 const Karakter = (props) => {
-    const { character } = props;
-    const { film } = props;
+    const { character, films } = props;
+    
     const [open, setOpen] = useState('');
+    const [openFilms, setOpenFilms] = useState('');
     const toggle = (id) => {
         if (open === id) {
             setOpen();
@@ -18,6 +19,14 @@ const Karakter = (props) => {
             setOpen(id);
         }
     };
+    const toggleFilms = (id) =>  {
+        if(openFilms===id) {
+            setOpenFilms();
+        }
+        else {
+            setOpenFilms(id)
+        }
+    }
 
     return (
         <>
@@ -34,16 +43,17 @@ const Karakter = (props) => {
                         <p>Skin Color : {character.skin_color}</p>
                         <span>Appears in {character.films.length} films</span>
                         <div>
-                            <Accordion flush open={open} toggle={toggle}>
-                                <AccordionItem >
-                                    <AccordionHeader targetId="1">{film.title}</AccordionHeader>
-                                    <AccordionBody accordionId="1">
+                            <Accordion flush open={openFilms} toggle={toggleFilms}>
+                               { films && films.map((film)=> <AccordionItem key={film.url}>
+                                    <AccordionHeader targetId={film.url}>{film.title}</AccordionHeader>
+                                    <AccordionBody accordionId={film.url}>
                                         <p>Gender : {film.opening_crawl}</p>
                                         <p>Directed by : {film.director}</p>
                                         <p>Produced by : {film.producer}</p>
                                         <p>Release Date : {film.release_date}</p>
                                     </AccordionBody>
                                 </AccordionItem>
+                               )}
                             </Accordion>
                         </div>
                     </AccordionBody>

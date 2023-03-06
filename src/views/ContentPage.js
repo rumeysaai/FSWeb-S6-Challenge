@@ -8,6 +8,7 @@ const ContentPage = () => {
   const [charsOnPage, setCharsOnPage] = useState([]);
   const [page, setPage] = useState(1);
   const charPerPage = 2;
+  const [films, setFilms] = useState([]);
   
   useEffect(() => {
     axios.get("https://swapi.dev/api/people/")
@@ -18,20 +19,13 @@ const ContentPage = () => {
     .catch((err) => {
       console.error(err);
     })
-  }, []);
-  
-
-  const [films, setFilms] = useState([]);
-
-  useEffect(() => {
-
     axios.get("https://swapi.dev/api/films/")
       .then((res) => {
         console.log(res.data);
         setFilms(res.data);
       })
-
   }, []);
+  
 
   return (
     <div className="App">
@@ -42,11 +36,9 @@ const ContentPage = () => {
       <div className="content" >
         <div>
           {characters && characters.map((character, index) => {
-            return <Karakter character={character} key={index}/>
+            return <Karakter character={character} key={index} films={films[0]?.results}/>
           })}
-          {films && films.map((film,ind) => {
-            return <Karakter film={film.results} key={ind}/>
-          })}
+        
         </div>
       </div>
     </div>
